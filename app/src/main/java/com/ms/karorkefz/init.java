@@ -1,29 +1,25 @@
 package com.ms.karorkefz;
 
-import android.app.Application;
-import android.content.Context;
+import android.util.Log;
+
 import de.robv.android.xposed.IXposedHookLoadPackage;
-import de.robv.android.xposed.XC_MethodHook;
-import de.robv.android.xposed.XposedBridge;
-import de.robv.android.xposed.XposedHelpers;
+import de.robv.android.xposed.XC_MethodReplacement;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
+
+import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
 
 public class init implements IXposedHookLoadPackage {
     @Override
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
-        if (lpparam.packageName.equals("com.tencent.karaoke")) {
-            XposedHelpers.findAndHookMethod(Application.class.getName(), lpparam.classLoader, "attach", Context.class, new XC_MethodHook() {
-                @Override
-                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                    super.afterHookedMethod(param);
-                    final ClassLoader classLoader = ((Context) param.args[0]).getClassLoader();
-                    if (classLoader == null) {
-                        XposedBridge.log("KaraokeHook,Can't get ClassLoader!");
-                        return;
-                    }
-                    new KaraokeHook(classLoader).init();
-                }
-            });
+        Log.v( "karorkefz", "进入init" );
+        if (lpparam.packageName.equals( "com.ms.karorkefz" )) {
+            findAndHookMethod( "com.ms.karorkefz.HookStatue", lpparam.classLoader, "isEnabled", XC_MethodReplacement.returnConstant( true ) );
+            return;
         }
+        if (lpparam.packageName.equals( "com.tencent.karaoke" )) {
+            Log.v( "karorkefz", "init-if包" );
+            new KaraokeHook().init();
+        }
+
     }
 }

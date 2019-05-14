@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">全名辅助</string>
+    <string name="app_name">全民k歌辅助</string>
+    <string name="description">全民k歌开启页广告时间缩短、歌房语音席改点击</string>
+    <string name="version">1.3</string>
 </resources>

@@ -1,65 +1,40 @@
 package com.ms.karorkefz;
 
-import android.app.Notification;
-import android.content.Context;
-import android.content.Intent;
-import android.graphics.drawable.BitmapDrawable;
-import android.net.Uri;
-import android.os.Parcelable;
 import android.util.Log;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.RemoteViews;
-import android.widget.TextView;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import de.robv.android.xposed.XC_MethodHook;
+import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
-import de.robv.android.xposed.XposedHelpers;
 
-import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
-
-class KaraokeHook  {
-    private ClassLoader classLoader;
-    KaraokeHook(ClassLoader mClassLoader) {
-        classLoader = mClassLoader;
-    }
+class KaraokeHook {
+    XSharedPreferences xSharedPreferences = new XSharedPreferences( "com.ms.karorkefz" );
+    boolean enableStart = xSharedPreferences.getBoolean( "enableStart", true );
+    boolean enableKTV = xSharedPreferences.getBoolean( "enableKTV", true );
+    boolean enableLIVE = xSharedPreferences.getBoolean( "enableLIVE", true );
 
     void init() {
+        Log.v( "karorkefz", "进入Karorke" );
         // 第一步：Hook方法ClassLoader#loadClass(String)
-        findAndHookMethod( ClassLoader.class, "loadClass", String.class, new XC_MethodHook() {
+        XposedBridge.hookAllMethods( ClassLoader.class, "loadClass", new XC_MethodHook() {
             @Override
-            protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-
-                List<String> classes = new ArrayList<>();
-                //TODO: Add the package name of application your want to hook!
-                classes.add( "com.tencent.karaoke.module.ktv.ui.KtvRoomActivity" );
-                classes.add( "com.tencent.karaoke.module.main.ui.MainTabActivity" );
-                classes.add( "com.tencent.karaoke.module.splash.ui.SplashBaseActivity" );
-//              classes.add( "com.tencent.karaoke.module.ktv.ui.KtvAudienceListActivity" );
+            protected void afterHookedMethod(XC_MethodHook.MethodHookParam param) throws Throwable {
                 if (param.hasThrowable()) return;
+                if (param.args.length != 1) return;
                 Class<?> cls = (Class<?>) param.getResult();
                 String name = cls.getName();
-                //XposedBridge.log(  name );
-                if (classes.contains( name )) {
-                    // 所有的类都是通过loadClass方法加载的
-                    // 所以这里通过判断全限定类名，查找到目标类
-                    // 第二步：Hook目标方法
-                    if (classLoader == null) {
-                        Log.e( "Xposed", "Can't get ClassLoader!" );
-                        return;
-                    }
-                    if (name.equals( "com.tencent.karaoke.module.ktv.ui.KtvRoomActivity" )) {
-                        new Karaoke_Ktv_Hook( classLoader ).init();
-                    }
-                    if (name.equals( "com.tencent.karaoke.module.splash.ui.SplashBaseActivity" )) {
-                        new Karaoke_MainTab_Hook( classLoader ).init();
-                    }
+                if (enableKTV && name.equals( "com.tencent.karaoke.module.ktv.ui.KtvRoomActivity" )) {
+                    Log.v( "karorkefz", "Karorke-准备加载Ktv" );
+                    new Karaoke_Ktv_Hook( cls.getClassLoader() ).init();
+                }
+                if (enableStart && name.equals( "com.tencent.karaoke.module.splash.ui.SplashBaseActivity" )) {
+                    Log.v( "karorkefz", "Karorke-准备加载maintab" );
+                    new Karaoke_MainTab_Hook( cls.getClassLoader() ).init();
+                }
+                if (enableLIVE && name.equals( "com.tencent.karaoke.module.live.ui.LiveActivity" )) {
+                    Log.v( "karorkefz", "Karorke-准备加载Live" );
+                    new Karaoke_Live_Hook( cls.getClassLoader() ).init();
                 }
             }
         } );
     }
-
 }

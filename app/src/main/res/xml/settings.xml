@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <SwitchPreference
+        android:defaultValue="true"
+        android:key="enableStart"
+        android:title="启动页广告关闭"/>
+    <SwitchPreference
+        android:defaultValue="true"
+        android:key="enableKTV"
+        android:title="歌房功能"/>
+    <SwitchPreference
+        android:defaultValue="true"
+        android:key="enableKTVY"
+        android:title="歌房语音席点击触发" />
+    <SwitchPreference
+        android:defaultValue="true"
+        android:key="enableKTVIN"
+        android:title="歌房密码自动输入"/>
+    <SwitchPreference
+        android:defaultValue="true"
+        android:key="enableKTV_cS"
+        android:title="歌房滑动禁用"/>
+    <SwitchPreference
+        android:defaultValue="true"
+        android:key="enableLIVE"
+        android:title="直播间功能"/>
+    <SwitchPreference
+        android:defaultValue="true"
+        android:key="enableLIVE_cS"
+        android:title="直播间滑动禁用"/>
+    <SwitchPreference
+        android:defaultValue="true"
+        android:key="enableLIVE_W"
+        android:title="直播间自动欢迎"/>
+    <Preference
+        android:key="statue"
+        android:title="状态" />
+    <Preference
+        android:key="github"
+        android:summary="https://github.com/jiumoshou/karorkefz"
+        android:title="项目地址" />
+    <Preference
+        android:key="Contact"
+        android:summary="1004952748"
+        android:title="联系Q群" />
+    <Preference
+        android:key="version"
+        android:summary="@string/version"
+        android:title="版本" />
+</PreferenceScreen>
