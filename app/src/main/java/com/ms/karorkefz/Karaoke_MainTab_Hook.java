@@ -16,16 +16,11 @@ public class Karaoke_MainTab_Hook {
 
     public void init() {
         Log.e( "karorkefz", "进入maintab" );
-
         //停止开始页面
         Class NewSplashAdView = XposedHelpers.findClass( "com.tencent.karaoke.module.splash.ui.NewSplashAdView", classLoader );
         XposedBridge.hookAllMethods( NewSplashAdView,
                 "a",
                 new XC_MethodHook() {
-                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                        //super.beforeHookedMethod(param);
-                    }
-
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                         Log.e( "karorkefz", "maintab-find" );
                         try {

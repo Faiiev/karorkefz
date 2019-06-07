@@ -12,7 +12,7 @@ public class MainActivity extends PreferenceActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
-//        setContentView( R.layout.activity_main );
+        //        setContentView( R.layout.activity_main );
         getPreferenceManager().setSharedPreferencesMode( MODE_WORLD_READABLE );
         addPreferencesFromResource( R.xml.settings );
         findPreference( "version" ).setOnPreferenceClickListener( new Preference.OnPreferenceClickListener() {

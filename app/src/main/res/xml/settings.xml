@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout="@android:layout/preference_category">
     <SwitchPreference
         android:defaultValue="true"
         android:key="enableStart"
@@ -32,6 +33,15 @@
         android:defaultValue="true"
         android:key="enableLIVE_W"
         android:title="直播间自动欢迎"/>
+    <EditTextPreference
+        android:key="enableLIVE_W_N"
+        android:dialogTitle="直播间自动欢迎语"
+        android:title="直播间自动欢迎语" />
+    <SwitchPreference
+        android:defaultValue="true"
+        android:key="enableLIVE_Gift"
+        android:summary="测试中"
+        android:title="直播间礼物截屏"/>
     <Preference
         android:key="statue"
         android:title="状态" />

@@ -1,59 +1,33 @@
 package com.ms.karorkefz;
 
-import android.view.View;
-import android.widget.EditText;
+import android.util.Log;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.lang.ref.WeakReference;
+import java.util.ArrayList;
 
 import de.robv.android.xposed.XposedHelpers;
 
 public class MyThread {
-    String g;
-    EditText inputEditText;
-    Object ClickObject;
-    View view;
-    ExecutorService live_fixedThreadPool = Executors.newFixedThreadPool( 50 );
-    ExecutorService send_fixedThreadPool = Executors.newSingleThreadExecutor();
+    XSingleThreadPool send_XSingleThreadPool = new XSingleThreadPool();
 
-    MyThread(String g, EditText inputEditText, Object ClickObject, View view) {
-        this.g = g;
-        this.inputEditText = inputEditText;
-        this.ClickObject = ClickObject;
-        this.view = view;
-    }
-
-    public void Live_init() {
-        live_fixedThreadPool.execute( new Runnable() {
-
-            @Override
+    public void Live_init(final Object uObject, final WeakReference one, final String two, final String three, final int four, final ArrayList five, final String six) {
+        new Thread() {
             public void run() {
                 try {
-                    Thread.sleep( 2000 );
-                    String a1 = "@" + g + "  欢迎来到直播间";
-                    send( a1 );
+                    sleep( 2000 );
                 } catch (InterruptedException e) {
-                    // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
+                send( uObject, one, two, three, four, five, six );
             }
-        } );
+        }.start();
     }
 
-    private void send(final String message) {
-        send_fixedThreadPool.execute( new Runnable() {
-
-            @Override
+    private void send(final Object uObject, final WeakReference one, final String two, final String three, final int four, final ArrayList five, final String six) {
+        send_XSingleThreadPool.add( new Runnable() {
             public void run() {
-                try {
-                    Thread.sleep( 1000 );
-                    inputEditText.setText( message );
-                    XposedHelpers.callMethod( ClickObject, "onClick", view );
-//                    Log.e( "karorkefz", "发送消息：" + a1 );
-                } catch (InterruptedException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
+                Log.e( "karorkefz", "线程2:" + six + TimeHook.SimpleDateFormat_Time() );
+                XposedHelpers.callMethod( uObject, "a", one, two, three, four, five, six );
             }
         } );
     }
