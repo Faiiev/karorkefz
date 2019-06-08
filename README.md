@@ -1,1 +1,1 @@
-# karorkefz
+1.在xposed或者太极模块页中勾选启用“全民K歌辅助”，xposed需要勾选后重启手机
