@@ -1,5 +1,27 @@
 <resources>
-    <string name="app_name">全民k歌辅助</string>
-    <string name="description">全民k歌开启页广告时间缩短、歌房语音席改点击</string>
-    <string name="version">1.4</string>
+    <string name="app_name" translatable="false">全民k歌辅助</string>
+    <string name="description" translatable="false">全民k歌开启页广告时间缩短、歌房语音席改点击</string>
+    <string name="version" translatable="false">1.4</string>
+    <string name="generic_settings" translatable="false">设置</string>
+    <string name="settings_title_show_icon" translatable="false">显示图标</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
+
+    <string-array name="days">
+        <item>VERBOSE</item>
+        <item>DEBUG</item>
+        <item>INFO</item>
+        <item>WARNING</item>
+        <item>ERROR</item>
+        <item>NO_LOG</item>
+    </string-array>
+
+    <string-array name="day_value">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
 </resources>

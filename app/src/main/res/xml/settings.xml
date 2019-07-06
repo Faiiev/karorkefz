@@ -3,58 +3,29 @@
     android:layout="@android:layout/preference_category">
     <SwitchPreference
         android:defaultValue="true"
-        android:key="enableStart"
-        android:title="启动页广告关闭"/>
+        android:key="show_icon"
+        android:title="@string/settings_title_show_icon" />
     <SwitchPreference
         android:defaultValue="true"
-        android:key="enableKTV"
-        android:title="歌房功能"/>
-    <SwitchPreference
-        android:defaultValue="true"
-        android:key="enableKTVY"
-        android:title="歌房语音席点击触发" />
-    <SwitchPreference
-        android:defaultValue="true"
-        android:key="enableKTVIN"
-        android:title="歌房密码自动输入"/>
-    <SwitchPreference
-        android:defaultValue="true"
-        android:key="enableKTV_cS"
-        android:title="歌房滑动禁用"/>
-    <SwitchPreference
-        android:defaultValue="true"
-        android:key="enableLIVE"
-        android:title="直播间功能"/>
-    <SwitchPreference
-        android:defaultValue="true"
-        android:key="enableLIVE_cS"
-        android:title="直播间滑动禁用"/>
-    <SwitchPreference
-        android:defaultValue="true"
-        android:key="enableLIVE_W"
-        android:title="直播间自动欢迎"/>
-    <EditTextPreference
-        android:key="enableLIVE_W_N"
-        android:dialogTitle="直播间自动欢迎语"
-        android:title="直播间自动欢迎语" />
-    <SwitchPreference
-        android:defaultValue="true"
-        android:key="enableLIVE_Gift"
-        android:summary="测试中"
-        android:title="直播间礼物截屏"/>
+        android:key="Log"
+        android:title="输出日志文件" />
+    <ListPreference
+        android:key="Log_Level"
+        android:entries="@array/days"
+        android:entryValues="@array/day_value"
+        android:title="日志级别"
+        android:summary="未选择"
+        />
     <Preference
-        android:key="statue"
-        android:title="状态" />
+        android:key="DeleteLog"
+        android:title="删除日志文件文件" />
     <Preference
-        android:key="github"
-        android:summary="https://github.com/jiumoshou/karorkefz"
-        android:title="项目地址" />
+        android:key="DeleteApdate"
+        android:title="删除本地适配文件" />
     <Preference
-        android:key="Contact"
-        android:summary="1004952748"
-        android:title="联系Q群" />
+        android:key="adapter"
+        android:title="检查适配更新" />
     <Preference
-        android:key="version"
-        android:summary="@string/version"
-        android:title="版本" />
+        android:key="update"
+        android:title="检查版本更新" />
 </PreferenceScreen>
